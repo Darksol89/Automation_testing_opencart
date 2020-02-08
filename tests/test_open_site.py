@@ -2,4 +2,4 @@
 
 
 def test_open_site(browser_driver, get_url):
-    assert 'Google' == browser_driver.title
+    assert 'Your Store' == browser_driver.title
