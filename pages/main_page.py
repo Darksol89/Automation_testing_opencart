@@ -2,9 +2,9 @@
 from selenium.webdriver.common.by import By
 
 
-class Selectors:
-    swiper_head = (By.CSS_SELECTOR, '.swiper-viewport #slideshow0')
-    swiper_footer = (By.CSS_SELECTOR, '.swiper-viewport #carousel0')
-    featured_header = (By.CSS_SELECTOR, 'h3')
-    button_group = (By.CSS_SELECTOR, '.button-group')
-    swiper_buttons = (By.CSS_SELECTOR, '.swiper-pager .swiper-button-next')
+class MainPage:
+    PROMOBLOCK_HEAD = (By.CSS_SELECTOR, '.swiper-viewport #slideshow0')
+    PROMOBLOCK_FOOTER = (By.CSS_SELECTOR, '.swiper-viewport #carousel0')
+    PRODUCT_HEADER = (By.CSS_SELECTOR, 'h3')
+    BUTTON_GROUP = (By.CSS_SELECTOR, '.button-group')
+    PROMOBLOCK_NAV_BUTTON = (By.CSS_SELECTOR, '.swiper-pager .swiper-button-next')
