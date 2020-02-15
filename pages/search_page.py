@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 
 
 class SearchPage:
+    OPEN_SEARCH_PAGE = (By.CSS_SELECTOR, '.input-group-btn')
     INPUT_SEARCH = (By.CSS_SELECTOR, '#input-search')
     CATEGORIES_LIST = (By.XPATH, "//select[@name='category_id']")
     CHECKBOX_DESCRIPTION = (By.CSS_SELECTOR, '#description')
