@@ -3,8 +3,9 @@ from selenium.webdriver.common.by import By
 
 
 class CatalogPage:
+    OPEN_CATALOG_PAGE = (By.XPATH, "//li[a='Tablets']")
     LIST_BUTTON = (By.CSS_SELECTOR, '#list-view')
-    GRID_BUTTON = (By.CSS_SELECTOR, 'grid-view')
+    GRID_BUTTON = (By.CSS_SELECTOR, '#grid-view')
     SORT_BY = (By.XPATH, '//select[@id="input-sort"]')
     SHOW_COMBOBOX = (By.XPATH, "//select[@id='input-limit']")
     PRODUCT_LIST = (By.CSS_SELECTOR, '.list-group')
