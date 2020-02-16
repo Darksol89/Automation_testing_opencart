@@ -1,13 +1,29 @@
 """Fixtures for start different browsers"""
 import pytest
+import json
+import os
 from selenium import webdriver
+from selenium.webdriver.support.wait import WebDriverWait
+from  selenium.webdriver.support import expected_conditions as EC
+from pages.login_page import LoginPage
 
+# Change working directory for open config file
+os.chdir(os.path.dirname(__file__))
+config_path = os.path.abspath('config.json')
+print(config_path)
+
+# Open config file and getting values
+with open(config_path) as config_file:
+    json_data = json.load(config_file)
+
+admin_name = json_data['username']
+password = json_data['password']
 
 def pytest_addoption(parser):
     """Parser for command line parameters"""
     parser.addoption('--url',
                      action='store',
-                     default='http://127.0.0.1/opencart/',
+                     default='http://127.0.0.1/opencart/admin/',
                      help='Main link for Opencart')
     parser.addoption('--browser_name',
                      action='store',
@@ -41,6 +57,26 @@ def browser_driver(request):
 def get_url(request, browser_driver):
     """Fixture for get link from parameter"""
     url = request.config.getoption("--url")
+    wait = WebDriverWait(browser_driver, 7)
     open_link = browser_driver.get(url)
     browser_driver.implicitly_wait(40)
     return open_link
+
+@pytest.fixture()
+def admin_dashboard(browser_driver):
+    """Fixture for login to Admin panel"""
+    username_input = browser_driver.find_element(*LoginPage.USERNAME_INPUT)
+    username_input.send_keys(admin_name)
+    password_input = browser_driver.find_element(*LoginPage.PASSWORD_INPUT)
+    password_input.send_keys(password)
+    browser_driver.find_element(*LoginPage.LOGIN_BUTTON).click()
+
+
+# def wait_element(browser_driver, locator):
+#     """Custom waitter different web elements"""
+#     try:
+#         WebDriverWait(browser_driver, 5).until(EC.visibility_of_element_located(locator))
+#         browser_driver.implicitly_wait(5)
+#     except EC.NoSuchElementException:
+#         print('Web element not found!')
+
