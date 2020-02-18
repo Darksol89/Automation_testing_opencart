@@ -12,4 +12,4 @@ class AdminDashboard:
         REMOVE = (By.CSS_SELECTOR, "button[data-original-title='Delete']")
         SAVE_NEW_PRODUCT = (By.CSS_SELECTOR, "button[data-original-title='Save']")
         CANCEL_NEW_PRODUCT = (By.CSS_SELECTOR, "a[data-original-title='Cancel']")
-        PRODUCT_CHECKBOX = (By.CSS_SELECTOR, "input[type='checkbox']")
+        PRODUCT_APPLE = (By.XPATH, "//table[@class='table table-bordered table-hover']//input[@value='42']")
