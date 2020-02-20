@@ -4,7 +4,6 @@ import json
 import os
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from pages.login_page import LoginPage
 
 # Change working directory for open config file
@@ -65,7 +64,7 @@ def get_url(request, browser_driver):
 
 
 @pytest.fixture()
-def admin_dashboard(browser_driver):
+def open_admin_dashboard(browser_driver):
     """Fixture for login to Admin panel"""
     username_input = browser_driver.find_element(*LoginPage.USERNAME_INPUT)
     username_input.send_keys(admin_name)
@@ -73,10 +72,4 @@ def admin_dashboard(browser_driver):
     password_input.send_keys(password)
     browser_driver.find_element(*LoginPage.LOGIN_BUTTON).click()
 
-# def wait_element(browser_driver, locator):
-#     """Custom waitter different web elements"""
-#     try:
-#         WebDriverWait(browser_driver, 5).until(EC.visibility_of_element_located(locator))
-#         browser_driver.implicitly_wait(5)
-#     except EC.NoSuchElementException:
-#         print('Web element not found!')
+

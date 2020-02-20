@@ -10,6 +10,13 @@ class AdminDashboard:
         ADD_NEW = (By.CSS_SELECTOR, 'a[data-original-title="Add New"]')
         EDIT = (By.CSS_SELECTOR, "a[data-original-title='Edit']")
         REMOVE = (By.CSS_SELECTOR, "button[data-original-title='Delete']")
-        SAVE_NEW_PRODUCT = (By.CSS_SELECTOR, "button[data-original-title='Save']")
-        CANCEL_NEW_PRODUCT = (By.CSS_SELECTOR, "a[data-original-title='Cancel']")
-        PRODUCT_APPLE = (By.XPATH, "//table[@class='table table-bordered table-hover']//input[@value='42']")
+        SAVE_PRODUCT = (By.CSS_SELECTOR, "button[data-original-title='Save']")
+        CANCEL_PRODUCT = (By.CSS_SELECTOR, "a[data-original-title='Cancel']")
+        PRODUCT_3 = (By.XPATH, "//table[@class='table table-bordered table-hover']//input[@value='30']")
+        PRODUCT_51 = (By.XPATH, "//table[@class='table table-bordered table-hover']//input[@value='54']")
+        SUCCESS_TEXT = (By.XPATH, "//div[contains(text(), 'Success: You have modified products!')]")
+
+    class ProductForm:
+        PRODUCT_NAME = (By.CSS_SELECTOR, '#input-name1')
+        META_TAG_TITLE = (By.CSS_SELECTOR, '#input-meta-title1')
+        PRODUCT_TAG = (By.CSS_SELECTOR, '#input-tag1')
