@@ -23,12 +23,16 @@ def pytest_addoption(parser):
     """Parser for command line parameters"""
     parser.addoption('--url',
                      action='store',
-                     default='http://127.0.0.1/opencart/admin/',
+                     default='http://127.0.0.1/opencart/',
                      help='Main link for Opencart')
     parser.addoption('--browser_name',
                      action='store',
-                     default='chrome',
+                     default='firefox',
                      help='Choose browser: ie, firefox, chrome')
+    parser.addoption('--timeout',
+                     action='store',
+                     default=40,
+                     help='Timeout for wait WebDriver')
 
 
 @pytest.fixture()
@@ -57,9 +61,11 @@ def browser_driver(request):
 def get_url(request, browser_driver):
     """Fixture for get link from parameter"""
     url = request.config.getoption("--url")
+    timeout = request.config.getoption('--timeout')
     wait = WebDriverWait(browser_driver, 7)
     open_link = browser_driver.get(url)
-    browser_driver.implicitly_wait(40)
+    browser_driver.implicitly_wait(timeout)
+
     return open_link
 
 
@@ -71,5 +77,3 @@ def open_admin_dashboard(browser_driver):
     password_input = browser_driver.find_element(*LoginPage.PASSWORD_INPUT)
     password_input.send_keys(password)
     browser_driver.find_element(*LoginPage.LOGIN_BUTTON).click()
-
-
