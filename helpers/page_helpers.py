@@ -1,6 +1,8 @@
+"""Custom waitter for web element"""
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support import expected_conditions as ec
+
 
 def wait_for_element(browser_driver, locator):
     """Custom waitter different web elements"""
