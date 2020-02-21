@@ -1,8 +1,10 @@
+import pytest
 from helpers.page_helpers import wait_for_element
 from pages.admin_dashboard_page import AdminDashboard
 
 
-def test_edit_product(browser_driver, get_url, open_admin_dashboard):
+@pytest.mark.parametrize('name, meta_tag', [('Test_Product', 'Test_Tag')])
+def test_edit_product(browser_driver, get_url, open_admin_dashboard, name, meta_tag):
     """Test for Edit one of product"""
     # Open Product page from Catalog
     browser_driver.find_element(*AdminDashboard.Navigation.CATALOG).click()
@@ -14,12 +16,12 @@ def test_edit_product(browser_driver, get_url, open_admin_dashboard):
     wait_for_element(browser_driver, AdminDashboard.ProductForm.PRODUCT_NAME)
     product_name = browser_driver.find_element(*AdminDashboard.ProductForm.PRODUCT_NAME)
     product_name.clear()
-    product_name.send_keys('TEST_PRODUCT')
+    product_name.send_keys(name)
     # Modify Meta Tag field
     wait_for_element(browser_driver, AdminDashboard.ProductForm.META_TAG_TITLE)
     meta_tag_title = browser_driver.find_element(*AdminDashboard.ProductForm.META_TAG_TITLE)
     meta_tag_title.clear()
-    meta_tag_title.send_keys('TEST_META_TITLE')
+    meta_tag_title.send_keys(meta_tag)
     # Save results
     browser_driver.find_element(*AdminDashboard.Products.SAVE_PRODUCT).click()
     # Check result
