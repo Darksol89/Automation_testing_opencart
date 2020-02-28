@@ -1,20 +1,28 @@
 from pages.admin_dashboard_page import AdminDashboard
 from selenium.webdriver.common.alert import Alert
-from helpers import page_helpers
+from helpers.page_helpers import wait_for_element
 
 
 def test_delete_product(browser_driver, get_url, open_admin_dashboard):
-    """Test for delete one of product"""
+    """Test for delete test product"""
 
     browser_driver.find_element(*AdminDashboard.Navigation.CATALOG).click()
-    page_helpers.wait_for_element(browser_driver, AdminDashboard.Navigation.CATALOG_PRODUCTS)
+    wait_for_element(browser_driver, AdminDashboard.Navigation.CATALOG_PRODUCTS)
     browser_driver.find_element(*AdminDashboard.Navigation.CATALOG_PRODUCTS).click()
-    # Check product from table
-    page_helpers.wait_for_element(browser_driver, AdminDashboard.Products.PRODUCT_51)
-    product_checkbox = browser_driver.find_element(*AdminDashboard.Products.PRODUCT_51)
+    # Find test product
+    wait_for_element(browser_driver, AdminDashboard.Products.TEST_PRODUCT_FOR_REMOVE)
+    product_checkbox = browser_driver.find_element(*AdminDashboard.Products.TEST_PRODUCT_FOR_REMOVE)
     product_checkbox.click()
+    # Copy product
+    browser_driver.find_element(*AdminDashboard.Products.COPY).click()
     # Delete product
+    wait_for_element(browser_driver, AdminDashboard.Products.TEST_PRODUCT_FOR_REMOVE)
+    product_checkbox = browser_driver.find_element(*AdminDashboard.Products.TEST_PRODUCT_FOR_REMOVE)
+    product_checkbox.click()
     browser_driver.find_element(*AdminDashboard.Products.REMOVE).click()
     Alert(browser_driver).accept()
-    assert product_checkbox.size == 0
+    # Check result
+    wait_for_element(browser_driver, AdminDashboard.Products.SUCCESS_TEXT)
+    success_text = browser_driver.find_element(*AdminDashboard.Products.SUCCESS_TEXT)
 
+    assert success_text.is_displayed()
