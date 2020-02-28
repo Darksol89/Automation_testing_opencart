@@ -1,6 +1,7 @@
 """Test different web elements in Product page"""
 import pytest
 from pages.product_page import ProductPage
+<<<<<<< Updated upstream
 from helpers.page_helpers import wait_for_element
 from selenium.common.exceptions import NoSuchElementException
 
@@ -8,6 +9,13 @@ from selenium.common.exceptions import NoSuchElementException
 def test_product_page(browser_driver, get_url):
     """Basic test for different web elements"""
     browser_driver.find_element(*ProductPage.OPEN_PRODUCT_PAGE).click()
+=======
+from pages.general_locators import GeneralSelectors
+
+
+def test_product_page(browser_driver, get_url):
+    browser_driver.find_element(*GeneralSelectors.OPEN_MACBOOK_PRODUCT_PAGE).click()
+>>>>>>> Stashed changes
     browser_driver.find_element(*ProductPage.ADD_TO_CARD)
     browser_driver.find_element(*ProductPage.ADD_TO_WISH_LIST)
     browser_driver.find_element(*ProductPage.COMPARE_PRODUCT)
