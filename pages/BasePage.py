@@ -14,6 +14,7 @@ class BasePage:
     def click_to_element(self, locator):
         """Click to web element"""
         try:
+            self.browser.implicitly_wait(3)
             WebDriverWait(self.browser, 5).until(ec.presence_of_element_located(locator))
         except NoSuchElementException:
             print('Element is not found')
