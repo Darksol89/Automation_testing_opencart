@@ -4,7 +4,7 @@ import json
 import os
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
-from pages.login_page import LoginPage
+from pages.LoginPage import LoginPage
 
 # Change working directory for open config file
 os.chdir(os.path.dirname(__file__))
