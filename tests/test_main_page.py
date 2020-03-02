@@ -1,5 +1,5 @@
 """Tests for visible other web element in the Opencart main page"""
-from pages.main_page import MainPage
+from pages.MainPage import MainPage
 
 
 def test_main_page(browser_driver, get_url):
