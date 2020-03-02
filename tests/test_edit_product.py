@@ -16,12 +16,12 @@ def test_edit_product(browser_driver, get_url, open_admin_dashboard, name, meta_
     wait_for_element(browser_driver, AdminDashboard.ProductForm.PRODUCT_NAME)
     product_name = browser_driver.find_element(*AdminDashboard.ProductForm.PRODUCT_NAME)
     product_name.clear()
-    product_name.send_keys(name)
+    product_name._send_keys(name)
     # Modify Meta Tag field
     wait_for_element(browser_driver, AdminDashboard.ProductForm.META_TAG_TITLE)
     meta_tag_title = browser_driver.find_element(*AdminDashboard.ProductForm.META_TAG_TITLE)
     meta_tag_title.clear()
-    meta_tag_title.send_keys(meta_tag)
+    meta_tag_title._send_keys(meta_tag)
     # Save results
     browser_driver.find_element(*AdminDashboard.Products.SAVE_PRODUCT).click()
     # Check result

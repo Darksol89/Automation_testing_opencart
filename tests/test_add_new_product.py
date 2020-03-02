@@ -15,14 +15,14 @@ def test_add_new_product(browser_driver, get_url, open_admin_dashboard, name, me
         product_name = browser_driver.find_element(*AdminDashboard.ProductForm.PRODUCT_NAME)
         product_meta_tag = browser_driver.find_element(*AdminDashboard.ProductForm.META_TAG_TITLE)
         product_name.clear()
-        product_name.send_keys(name)
+        product_name._send_keys(name)
         product_meta_tag.clear()
-        product_meta_tag.send_keys(meta_tag)
+        product_meta_tag._send_keys(meta_tag)
         # Change tab
         browser_driver.find_element(*AdminDashboard.ProductForm.Tabs.DATA_TAB).click()
         # Input Model
         prod_model = browser_driver.find_element(*AdminDashboard.ProductForm.MODEL)
-        prod_model.send_keys(model)
+        prod_model._send_keys(model)
         browser_driver.find_element(*AdminDashboard.Products.SAVE_PRODUCT).click()
     except:
         print('Something wrong!')
