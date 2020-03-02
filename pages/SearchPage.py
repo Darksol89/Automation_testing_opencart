@@ -12,20 +12,25 @@ class SearchPage(BasePage):
     SEARCH_BUTTON = (By.CSS_SELECTOR, 'input[type="button"]')
 
     def open_search_page(self):
-        self.click_to_element(GeneralSelectors.OPEN_SEARCH_PAGE)
+        self._click_to_element(GeneralSelectors.OPEN_SEARCH_PAGE)
 
-    def input_search(self):
-        assert self.browser.find_element(*self.INPUT_SEARCH)
-
-    def categories_list(self):
-        assert self.browser.find_element(*self.CATEGORIES_LIST)
+    def select_categories(self, option):
+        self._selecting_by_visible_text(self.CATEGORIES_LIST, text=option)
+        return self
 
     def checkbox_description(self):
-        assert self.browser.find_element(*self.CHECKBOX_DESCRIPTION)
+        self._click_to_element(self.CHECKBOX_DESCRIPTION)
+        return self
 
-    def checkbox_subcategories(self):
-        assert self.browser.find_element(*self.CHECKBOX_SUBCATEGORIES)
+    def checkbox_subcategories_disabled(self):
+        self.browser.find_element(*self.CHECKBOX_SUBCATEGORIES).get_attribute('disabled')
+        return self
 
-    def search_button(self):
-        search_btn = self.browser.find_element(*self.SEARCH_BUTTON)
-        assert search_btn.is_displayed()
+    def checkbox_subcategories_enable(self):
+        self._click_to_element(self.CHECKBOX_SUBCATEGORIES)
+        return self
+
+    def search_result(self, word):
+        self._send_keys(word, self.INPUT_SEARCH)
+        self._click_to_element(self.SEARCH_BUTTON)
+        return self

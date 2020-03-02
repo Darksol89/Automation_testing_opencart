@@ -14,33 +14,36 @@ class ProductPage(BasePage):
     RATING = (By.CSS_SELECTOR, '.rating')
 
     def open_product_page(self):
-        self.click_to_element(GeneralSelectors.OPEN_MACBOOK_PRODUCT_PAGE)
+        self._click_to_element(GeneralSelectors.OPEN_MACBOOK_PRODUCT_PAGE)
+        return self
 
     def add_to_card(self):
         """Check add to card button"""
         try:
             wait_for_element(self.browser, self.ADD_TO_CARD)
-            self.click_to_element(self.ADD_TO_CARD)
+            self._click_to_element(self.ADD_TO_CARD)
         except NoSuchElementException:
             print('Add to Card button is not displayed')
 
-        assert self.browser.find_element(*self.ADD_TO_CARD).is_displayed()
+        return self
 
     def quantity(self, qty):
         """Check input quantity"""
         try:
             wait_for_element(self.browser, self.QUANTITY)
-            self.send_keys(qty, self.QUANTITY)
+            self._send_keys(qty, self.QUANTITY)
         except NoSuchElementException:
             print('Quantity field is not available')
 
-        assert self.browser.find_element(*self.QUANTITY).get_attribute('value') == str(qty)
+        return self
 
     def add_to_wish_list(self):
-        assert self.browser.find_element(*self.ADD_TO_WISH_LIST)
+        self._click_to_element(self.ADD_TO_WISH_LIST)
+        return self
 
     def compare_product(self):
-        assert self.browser.find_element(*self.COMPARE_PRODUCT)
+        self._click_to_element(self.COMPARE_PRODUCT)
+        return self
 
     def rating(self):
         """Check rating stage"""
@@ -51,4 +54,4 @@ class ProductPage(BasePage):
         except NoSuchElementException:
             print('Rating stage is not displayed')
 
-        assert self.browser.find_element(*self.RATING).is_displayed()
+        return self
