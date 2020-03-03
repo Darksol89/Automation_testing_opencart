@@ -33,9 +33,9 @@ class BasePage:
         select = Select(self.browser.find_element(*locator))
         select.select_by_visible_text(text)
 
-    def _get_element_attribute(self, locator, attr):
-        """Get attribute from web element"""
-        return self.browser.find_element(locator).get_attribute(attr)
+    def _get_element_text(self, locator):
+        """Get text from web element"""
+        return self.browser.find_element(locator).text
 
     def _wait_for_visible(self, locator, time_wait=3):
         return WebDriverWait(self.browser, time_wait).until(ec.visibility_of(self.browser.find_element(*locator)))
