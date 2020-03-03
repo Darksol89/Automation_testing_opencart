@@ -3,10 +3,24 @@ from pages.MainPage import MainPage
 
 
 def test_main_page(browser_driver, get_url):
-    main_page = MainPage(browser_driver)
-    main_page.promoblock_head()
-    main_page.promoblock_footer()
-    main_page.promoblock_navigation_buttons()
-    main_page.main_page_buttons()
-    main_page.product_header()
-    
+    MainPage(browser_driver) \
+        .promoblock_head() \
+        .promoblock_footer() \
+        .add_to_card_button() \
+        .get_product_header()
+
+
+def test_promoblocks(browser_driver, get_url):
+    MainPage(browser_driver) \
+        .promoblock_head() \
+        .promoblock_footer()
+
+
+def test_verify_feature_header(browser_driver, get_url):
+    MainPage(browser_driver).get_product_header()
+
+
+def test_add_to_card_button(browser_driver, get_url):
+    MainPage(browser_driver) \
+        .add_to_card_button() \
+        ._click_to_element(MainPage.ADD_TO_CARD_BUTTON)
