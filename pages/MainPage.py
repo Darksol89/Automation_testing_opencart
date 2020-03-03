@@ -1,29 +1,28 @@
 """Selectors for different elements in the Opencart main page """
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
-from pages.general_locators import GeneralSelectors
 from pages.BasePage import BasePage
-from helpers.page_helpers import wait_for_element
 
 
 class MainPage(BasePage):
     PROMOBLOCK_HEAD = (By.CSS_SELECTOR, '.swiper-viewport #slideshow0')
     PROMOBLOCK_FOOTER = (By.CSS_SELECTOR, '.swiper-viewport #carousel0')
-    PRODUCT_HEADER = (By.CSS_SELECTOR, 'h3')
-    BUTTON_GROUP = (By.CSS_SELECTOR, '.button-group')
-    PROMOBLOCK_NAV_BUTTON = (By.CSS_SELECTOR, '.swiper-pager .swiper-button-next')
+    PRODUCT_HEADER = (By.XPATH, '//h3[text()="Featured"]')
+    ADD_TO_CARD_BUTTON = (By.XPATH, '//span[text()="Add to Cart"]')
+
 
     def promoblock_head(self):
-        assert self.browser.find_element(*self.PROMOBLOCK_HEAD)
+        self._wait_for_visible(self.PROMOBLOCK_HEAD)
+        return self
 
     def promoblock_footer(self):
-        assert self.browser.find_element(*self.PROMOBLOCK_FOOTER)
+        self._wait_for_visible(self.PROMOBLOCK_FOOTER)
+        return self
 
-    def product_header(self):
-        assert self.browser.find_element(*self.PRODUCT_HEADER)
+    def get_product_header(self):
+        self._wait_for_visible(self.PRODUCT_HEADER)
+        return self
 
-    def main_page_buttons(self):
-        assert self.browser.find_elements(*self.BUTTON_GROUP)
+    def add_to_card_button(self):
+        self.browser.find_element(*self.ADD_TO_CARD_BUTTON).is_enabled()
+        return self
 
-    def promoblock_navigation_buttons(self):
-        assert self.browser.find_elements(*self.PROMOBLOCK_NAV_BUTTON)
