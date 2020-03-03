@@ -42,4 +42,3 @@ class CartPage(BasePage):
 
     def continue_shopping(self):
         self._click_to_element(self.CONTINUE_SHOPPING)
-        assert self.browser.title == 'Your Store'
