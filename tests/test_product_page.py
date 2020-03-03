@@ -9,6 +9,9 @@ def test_product_quantity(browser_driver, get_url, qty):
     ProductPage(browser_driver) \
         .open_product_page() \
         .quantity(qty)
+    qty_value = browser_driver.find_element(*ProductPage.QUANTITY).get_attribute('value')
+
+    assert str(qty_value) == str(qty)
 
 
 def test_add_to_card_button(browser_driver, get_url):
