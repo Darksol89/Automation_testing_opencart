@@ -1,13 +1,26 @@
 """Test for different web element in Login page"""
+import pytest
+from pages import LoginPage
 
-from pages.login_page import LoginPage
-from pages.general_locators import GeneralSelectors
+
+@pytest.mark.parametrize('email, password', [('test@ro.ru', '1234')])
+def test_login_user(browser_driver, get_url, email, password):
+    LoginPage(browser_driver) \
+        .open_account_page() \
+        .login_user(email, password)
 
 
-def test_login_admin(browser_driver, get_url):
-    browser_driver.find_element(*GeneralSelectors.OPEN_LOGIN_PAGE).click()
-    browser_driver.find_element(*LoginPage.CONTINUE)
-    browser_driver.find_element(*LoginPage.EMAIL_INPUT)
-    browser_driver.find_element(*LoginPage.FORGOTTEN_PASSWORD)
-    browser_driver.find_element(*LoginPage.PASSWORD_INPUT)
-    browser_driver.find_element(*LoginPage.SUBMIT)
+def test_open_new_customer_page(browser_driver, get_url):
+    LoginPage(browser_driver) \
+        .open_account_page() \
+        .register_new_user()
+
+    assert browser_driver.title == 'Register Account'
+
+
+def test_open_forgotten_password_page(browser_driver, get_url):
+    LoginPage(browser_driver) \
+        .open_account_page() \
+        .forgotten_password_form()
+
+    assert browser_driver.title == 'Forgot Your Password?'

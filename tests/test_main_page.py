@@ -1,10 +1,26 @@
 """Tests for visible other web element in the Opencart main page"""
-from pages.main_page import MainPage
+from pages.MainPage import MainPage
 
 
 def test_main_page(browser_driver, get_url):
-    browser_driver.find_element(*MainPage.PROMOBLOCK_HEAD)
-    browser_driver.find_element(*MainPage.PROMOBLOCK_FOOTER)
-    browser_driver.find_element(*MainPage.PRODUCT_HEADER)
-    browser_driver.find_elements(*MainPage.BUTTON_GROUP)
-    browser_driver.find_elements(*MainPage.PROMOBLOCK_NAV_BUTTON)
+    MainPage(browser_driver) \
+        .promoblock_head() \
+        .promoblock_footer() \
+        .add_to_card_button() \
+        .get_product_header()
+
+
+def test_promoblocks(browser_driver, get_url):
+    MainPage(browser_driver) \
+        .promoblock_head() \
+        .promoblock_footer()
+
+
+def test_verify_feature_header(browser_driver, get_url):
+    MainPage(browser_driver).get_product_header()
+
+
+def test_add_to_card_button(browser_driver, get_url):
+    MainPage(browser_driver) \
+        .add_to_card_button() \
+        ._click_to_element(MainPage.ADD_TO_CARD_BUTTON)
