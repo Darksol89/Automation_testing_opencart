@@ -4,7 +4,7 @@ import json
 import os
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
-from pages.LoginPage import LoginPage
+from PageObject.LoginPage import LoginPage
 
 # Change working directory for open config file
 os.chdir(os.path.dirname(__file__))
@@ -23,7 +23,7 @@ def pytest_addoption(parser):
     """Parser for command line parameters"""
     parser.addoption('--url',
                      action='store',
-                     default='http://127.0.0.1/opencart/',
+                     default='http://127.0.0.1/opencart/admin',
                      help='Main link for Opencart')
     parser.addoption('--browser_name',
                      action='store',
