@@ -1,6 +1,6 @@
 """Test for different web element in Search page"""
 
-from pages.SearchPage import SearchPage
+from PageObject.SearchPage import SearchPage
 
 
 def test_input_for_search(browser_driver, get_url):

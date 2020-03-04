@@ -1,6 +1,6 @@
 """Test different web elements in Product page"""
 import pytest
-from pages import ProductPage, CartPage
+from PageObject import ProductPage, CartPage
 
 
 @pytest.mark.parametrize('qty', ['10'], ids=['quantity=10'])
