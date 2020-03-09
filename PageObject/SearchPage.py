@@ -1,7 +1,7 @@
 """Selectors for different elements in the Opencart search page """
 from selenium.webdriver.common.by import By
-from pages.general_locators import GeneralSelectors
-from pages.BasePage import BasePage
+from PageObject.GeneralLocators import GeneralSelectors
+from PageObject.BasePage import BasePage
 
 
 class SearchPage(BasePage):

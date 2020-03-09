@@ -1,6 +1,6 @@
 """Different tests for web elements in Cart page"""
 import pytest
-from pages import ProductPage, CartPage
+from PageObject import ProductPage, CartPage
 
 
 def test_update_product(browser_driver, get_url):

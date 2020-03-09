@@ -1,6 +1,6 @@
 """Selectors for different elements in the Opencart main page """
 from selenium.webdriver.common.by import By
-from pages.BasePage import BasePage
+from PageObject.BasePage import BasePage
 
 
 class MainPage(BasePage):

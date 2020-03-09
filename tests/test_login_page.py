@@ -1,6 +1,6 @@
 """Test for different web element in Login page"""
 import pytest
-from pages import LoginPage
+from PageObject import LoginPage
 
 
 @pytest.mark.parametrize('email, password', [('test@ro.ru', '1234')])

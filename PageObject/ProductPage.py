@@ -1,7 +1,7 @@
 """Selectors for different elements in the Opencart product page """
 from selenium.common.exceptions import NoSuchElementException
-from pages.general_locators import GeneralSelectors
-from pages.BasePage import BasePage
+from PageObject.GeneralLocators import GeneralSelectors
+from PageObject.BasePage import BasePage
 from selenium.webdriver.common.by import By
 from helpers.page_helpers import wait_for_element
 
