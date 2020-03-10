@@ -1,5 +1,9 @@
 """Selectors for different elements in the Opencart admin page """
+import os
+import time
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.alert import Alert
 from PageObject.BasePage import BasePage
 
 
@@ -24,9 +28,15 @@ class AdminDashboard(BasePage):
         META_TAG_TITLE = (By.CSS_SELECTOR, '#input-meta-title1')
         PRODUCT_TAG = (By.CSS_SELECTOR, '#input-tag1')
         MODEL = (By.CSS_SELECTOR, '#input-model')
+        IMAGE = (By.XPATH, "//div[@id='tab-image']//a/img")
+        EDIT_IMAGE = (By.XPATH, "//button[@id='button-image']")
+        UPLOAD_IMAGE = (By.XPATH, "//button[@data-original-title='Upload']")
+        CHOOSE_FILE = (By.CSS_SELECTOR, "input[type='file']")
+        CLOSE_UPLOAD_WINDOW = (By.XPATH, "//button[contains(text(), '×')]")
 
         class ProductTabs:
-            DATA_TAB = (By.XPATH, '//*[@id="form-product"]/ul/li[2]/a')
+            DATA_TAB = (By.XPATH, '//*[@id="form-product"]//li/a[contains(text(), "Data")]')
+            IMAGE_TAB = (By.XPATH, '//*[@id="form-product"]//li/a[contains(text(), "Image")]')
 
     class OptionsForm:
         OPTION_NAME = (By.CSS_SELECTOR, '.input-group input')
@@ -76,6 +86,29 @@ class AdminDashboard(BasePage):
     def input_product_form_data_tab(self, model):
         self._click_to_element(self.ProductForm.ProductTabs.DATA_TAB)
         self._send_keys(model, self.ProductForm.MODEL)
+        return self
+
+    def upload_new_image(self):
+        self._click_to_element(self.ProductForm.ProductTabs.IMAGE_TAB)
+        self._click_to_element(self.ProductForm.IMAGE)
+        self._click_to_element(self.ProductForm.EDIT_IMAGE)
+        self._wait_for_visible(self.ProductForm.UPLOAD_IMAGE)
+        self._click_to_element(self.ProductForm.UPLOAD_IMAGE)
+        return self
+
+    def select_image_from_explorer(self):
+        # Change working directory for open config file
+        filename = os.path.abspath('selenium.png')
+        print(filename)
+        choose_file = self.browser.find_element(*self.ProductForm.CHOOSE_FILE)
+        choose_file.send_keys(filename)
+        time.sleep(5)
+        alert = self.browser.switch_to.alert
+        alert.accept()
+        return self
+
+    def close_upload_window(self):
+        self._click_to_element(self.ProductForm.CLOSE_UPLOAD_WINDOW)
         return self
 
     def input_options_form(self, option_name, type=None, sort_order=None):
