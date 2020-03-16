@@ -1,7 +1,12 @@
 """Selectors for different elements in the Opencart search page """
+import logging
 from selenium.webdriver.common.by import By
 from PageObject.GeneralLocators import GeneralSelectors
 from PageObject.BasePage import BasePage
+
+# Create custom logger
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger('Search Page')
 
 
 class SearchPage(BasePage):
@@ -13,6 +18,7 @@ class SearchPage(BasePage):
 
     def open_search_page(self):
         self._click_to_element(GeneralSelectors.OPEN_SEARCH_PAGE)
+        logger.info('Open Search Page')
 
     def select_categories(self, option):
         self._selecting_by_visible_text(self.CATEGORIES_LIST, text=option)

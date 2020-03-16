@@ -1,10 +1,11 @@
 """PageObject pattern for Cart page"""
-
-from selenium.common.exceptions import NoSuchElementException
-from PageObject.GeneralLocators import GeneralSelectors
+import logging
 from PageObject.BasePage import BasePage
 from selenium.webdriver.common.by import By
-from helpers.page_helpers import wait_for_element
+
+# Create custom logger
+logging.basicConfig(level=logging.INFO)
+cart_logger = logging.getLogger('Cart Page')
 
 
 class CartPage(BasePage):
@@ -20,6 +21,7 @@ class CartPage(BasePage):
 
     def open_cart(self):
         self._click_to_element(self.CART_BUTTON)
+        cart_logger.info('Open Cart Page')
         return self
 
     def click_view_cart(self):

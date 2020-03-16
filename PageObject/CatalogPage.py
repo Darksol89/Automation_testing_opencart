@@ -1,7 +1,12 @@
 """Selectors for different elements in the Opencart catalog page """
+import logging
 from selenium.webdriver.common.by import By
 from PageObject.GeneralLocators import GeneralSelectors
 from PageObject.BasePage import BasePage
+
+# Create custom logger
+logging.basicConfig(level=logging.INFO)
+catalog_logger = logging.getLogger('Catalog Page')
 
 
 class CatalogPage(BasePage):
@@ -17,6 +22,7 @@ class CatalogPage(BasePage):
 
     def open_catalog_page(self):
         self._click_to_element(GeneralSelectors.OPEN_TABLETS_CATALOG_PAGE)
+        catalog_logger.info('Open Catalog Page')
         return self
 
     def list_button_active(self):
