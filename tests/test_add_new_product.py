@@ -12,6 +12,9 @@ def test_add_new_product(browser_driver, get_url, open_admin_dashboard, name, me
         .add_new_element() \
         .input_product_form_general_tab(prod_name=name, meta_tag=meta_tag) \
         .input_product_form_data_tab(model=model) \
+        .upload_new_image()\
+        .select_image_from_explorer()\
+        .close_upload_window()\
         .save_element()
 
     # Check result
