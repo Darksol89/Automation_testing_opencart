@@ -49,6 +49,7 @@ def my_logger(request):
     filename = request.config.getoption('--file')
     logging.basicConfig(level=logging.INFO, filename=filename)
     logger = logging.getLogger('Web Driver')
+    logger.addHandler(logging.FileHandler(filename))
 
     return logger
 
