@@ -1,9 +1,14 @@
 """Selectors for different elements in the Opencart login page """
+import logging
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 from PageObject.GeneralLocators import GeneralSelectors
 from PageObject.BasePage import BasePage
 from helpers.page_helpers import wait_for_element
+
+# Create custom logger
+logging.basicConfig(level=logging.INFO)
+login_logger = logging.getLogger('Login Page')
 
 
 class LoginPage(BasePage):
@@ -17,6 +22,7 @@ class LoginPage(BasePage):
 
     def open_account_page(self):
         self._click_to_element(GeneralSelectors.OPEN_LOGIN_PAGE)
+        login_logger.info('Open Login Page')
         return self
 
     def login_user(self, email, password):
@@ -24,7 +30,6 @@ class LoginPage(BasePage):
         self._send_keys(password, self.PASSWORD_INPUT)
         self._click_to_element(self.LOGIN_SUBMIT)
         return self
-
 
     def register_new_user(self):
         try:
@@ -43,6 +48,3 @@ class LoginPage(BasePage):
             print('Forgotten password button is not available')
 
         return self
-
-
-

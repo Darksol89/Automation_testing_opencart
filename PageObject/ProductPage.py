@@ -1,9 +1,14 @@
 """Selectors for different elements in the Opencart product page """
+import logging
 from selenium.common.exceptions import NoSuchElementException
 from PageObject.GeneralLocators import GeneralSelectors
 from PageObject.BasePage import BasePage
 from selenium.webdriver.common.by import By
 from helpers.page_helpers import wait_for_element
+
+# Create custom logger
+logging.basicConfig(level=logging.INFO)
+product_logger = logging.getLogger('Product Page')
 
 
 class ProductPage(BasePage):
@@ -15,6 +20,7 @@ class ProductPage(BasePage):
 
     def open_product_page(self):
         self._click_to_element(GeneralSelectors.OPEN_MACBOOK_PRODUCT_PAGE)
+        product_logger.info('Open Product Page')
         return self
 
     def add_to_card(self):

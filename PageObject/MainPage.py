@@ -1,4 +1,5 @@
 """Selectors for different elements in the Opencart main page """
+import logging
 from selenium.webdriver.common.by import By
 from PageObject.BasePage import BasePage
 
@@ -9,6 +10,13 @@ class MainPage(BasePage):
     PRODUCT_HEADER = (By.XPATH, '//h3[text()="Featured"]')
     ADD_TO_CARD_BUTTON = (By.XPATH, '//span[text()="Add to Cart"]')
 
+    # Create custom logger
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger('Main Page')
+
+    def logger_message(self):
+        self.logger.info('Open Main Page')
+        return self
 
     def promoblock_head(self):
         self._wait_for_visible(self.PROMOBLOCK_HEAD)
@@ -25,4 +33,3 @@ class MainPage(BasePage):
     def add_to_card_button(self):
         self.browser.find_element(*self.ADD_TO_CARD_BUTTON).is_enabled()
         return self
-
