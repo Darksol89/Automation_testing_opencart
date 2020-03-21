@@ -22,8 +22,8 @@ admin_name = json_data['username']
 password = json_data['password']
 
 # Logger with Info message for start and finish browser
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger('Web Driver')
+# logging.basicConfig(level=logging.INFO)
+# logger = logging.getLogger('Web Driver')
 
 def pytest_addoption(parser):
     """Parser for command line parameters"""
@@ -33,34 +33,48 @@ def pytest_addoption(parser):
                      help='Main link for Opencart')
     parser.addoption('--browser_name',
                      action='store',
-                     default='firefox',
+                     default='chrome',
                      help='Choose browser: ie, firefox, chrome')
     parser.addoption('--timeout',
                      action='store',
                      default=40,
                      help='Timeout for wait WebDriver')
-
+    parser.addoption('--file',
+                     action='store',
+                     default=None,
+                     help='Filename with log report')
 
 @pytest.fixture()
-def browser_driver(request):
+def my_logger(request):
+    filename = request.config.getoption('--file')
+    logging.basicConfig(level=logging.INFO, filename=filename)
+    logger = logging.getLogger('Web Driver')
+
+    return logger
+
+@pytest.fixture()
+def browser_driver(request, my_logger):
     """Initializing and open browser"""
     browser = request.config.getoption("--browser_name")
     if browser == 'ie':
-        logger.info('\nStart Internet Explorer browser for test...')
+        my_logger.info('\nStart Internet Explorer browser for test...')
         browser = webdriver.Ie()
     elif browser == 'chrome':
-        logger.info('\nStart Chrome browser for test...')
+        my_logger.info('\nStart Chrome browser for test...')
         options = webdriver.ChromeOptions()
         options.add_argument("headless")
         browser = webdriver.Chrome(options=options)
     elif browser == 'firefox':
-        logger.info('\nStart Firefox browser for test...')
+        my_logger.info('\nStart Firefox browser for test...')
         options = webdriver.FirefoxOptions()
         options.add_argument("-headless")
-        #browser = webdriver.Firefox(options=options)
+        browser = webdriver.Firefox(options=options)
         browser = EventFiringWebDriver(webdriver.Firefox(options=options), Listener())
     yield browser
-    logger.info('\nClose browser...')
+    browser_log = browser.get_log('browser')
+    if 'ERROR' in browser_log:
+        my_logger.info('Error in browser log')
+    my_logger.info('\nClose browser...')
     browser.quit()
 
 
