@@ -1,16 +1,18 @@
 """Test for different web element in Search page"""
-
+import allure
 from PageObject.SearchPage import SearchPage
 
-
+@allure.title('Test search input')
 def test_input_for_search(browser_driver, get_url):
     search_page = SearchPage(browser_driver)
-    search_page.open_search_page()
-    search_page.search_result(word='Test')
+    with allure.step('Open Search Page'):
+        search_page.open_search_page()
+    with allure.step('Searching results'):
+        search_page.search_result(word='Test')
 
     assert browser_driver.title == 'Search - Test'
 
-
+@allure.title('Test subcategories checkbox')
 def test_subcategories_checkbox_disabled(browser_driver, get_url):
     search_page = SearchPage(browser_driver)
     search_page.open_search_page()

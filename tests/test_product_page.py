@@ -1,8 +1,9 @@
 """Test different web elements in Product page"""
 import pytest
+import allure
 from PageObject import ProductPage, CartPage
 
-
+@allure.description("Different test cases with some functional in Product")
 @pytest.mark.parametrize('qty', ['10'], ids=['quantity=10'])
 def test_product_quantity(browser_driver, get_url, my_logger, qty):
     """Test for input in quantity field"""
