@@ -7,7 +7,6 @@ from PageObject.BasePage import BasePage
 from helpers.page_helpers import wait_for_element
 
 # Create custom logger
-logging.basicConfig(level=logging.INFO)
 login_logger = logging.getLogger('Login Page')
 
 
@@ -33,7 +32,7 @@ class LoginPage(BasePage):
 
     def register_new_user(self):
         try:
-            wait_for_element(self.browser, self.CONTINUE)
+            wait_for_element(self.driver, self.CONTINUE)
             self._click_to_element(self.CONTINUE)
         except NoSuchElementException:
             print('Continue button is not available')
@@ -42,7 +41,7 @@ class LoginPage(BasePage):
 
     def forgotten_password_form(self):
         try:
-            wait_for_element(self.browser, self.FORGOTTEN_PASSWORD)
+            wait_for_element(self.driver, self.FORGOTTEN_PASSWORD)
             self._click_to_element(self.FORGOTTEN_PASSWORD)
         except NoSuchElementException:
             print('Forgotten password button is not available')

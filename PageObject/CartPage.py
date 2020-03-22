@@ -4,7 +4,6 @@ from PageObject.BasePage import BasePage
 from selenium.webdriver.common.by import By
 
 # Create custom logger
-logging.basicConfig(level=logging.INFO)
 cart_logger = logging.getLogger('Cart Page')
 
 

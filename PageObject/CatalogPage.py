@@ -5,8 +5,7 @@ from PageObject.GeneralLocators import GeneralSelectors
 from PageObject.BasePage import BasePage
 
 # Create custom logger
-logging.basicConfig(level=logging.INFO)
-catalog_logger = logging.getLogger('Catalog Page')
+#catalog_logger = logging.getLogger('Catalog Page')
 
 
 class CatalogPage(BasePage):
@@ -20,9 +19,10 @@ class CatalogPage(BasePage):
     SHOW_VALUE_SELECTED = (By.XPATH, "//select[@id='input-limit']/option[@selected]")
     PRODUCT_TREE = (By.CSS_SELECTOR, '.list-group')
 
+    _logger_name = 'Catalog Page'
+
     def open_catalog_page(self):
         self._click_to_element(GeneralSelectors.OPEN_TABLETS_CATALOG_PAGE)
-        catalog_logger.info('Open Catalog Page')
         return self
 
     def list_button_active(self):
@@ -45,5 +45,5 @@ class CatalogPage(BasePage):
         return self
 
     def verify_product_tree(self):
-        self.browser.find_element(*self.PRODUCT_TREE)
+        self.driver.find_element(*self.PRODUCT_TREE)
         return self

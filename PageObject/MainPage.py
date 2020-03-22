@@ -10,11 +10,11 @@ class MainPage(BasePage):
     PRODUCT_HEADER = (By.XPATH, '//h3[text()="Featured"]')
     ADD_TO_CARD_BUTTON = (By.XPATH, '//span[text()="Add to Cart"]')
 
-    def __init__(self, browser, _logger_name='Main Page'):
-        super().__init__(browser, _logger_name)
-        self._logger_name = _logger_name
+    _logger_name = 'Main Page'
+    logger = logging.getLogger(_logger_name)
 
     def promoblock_head(self):
+        # self.logger.info('Open Main Page')
         self._wait_for_visible(self.PROMOBLOCK_HEAD)
         return self
 

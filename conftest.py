@@ -3,10 +3,13 @@ import pytest
 import json
 import os
 import logging
+import sys
+import allure
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from PageObject.LoginPage import LoginPage
 from helpers.log_listener import Listener
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.support.events import EventFiringWebDriver
 
 # Change working directory for open config file
@@ -49,7 +52,12 @@ def my_logger(request):
     filename = request.config.getoption('--file')
     logging.basicConfig(level=logging.INFO, filename=filename)
     logger = logging.getLogger('Web Driver')
-    logger.addHandler(logging.FileHandler(filename))
+    if filename == None:
+        stdout_handler = logging.StreamHandler(sys.stdout)
+        logger.addHandler(stdout_handler)
+    else:
+        file_handler = logging.FileHandler(filename)
+        logger.addHandler(file_handler)
 
     return logger
 
@@ -62,9 +70,11 @@ def browser_driver(request, my_logger):
         browser = webdriver.Ie()
     elif browser == 'chrome':
         my_logger.info('\nStart Chrome browser for test...')
+        d = DesiredCapabilities.CHROME
         options = webdriver.ChromeOptions()
         options.add_argument("headless")
-        browser = webdriver.Chrome(options=options)
+        d['loggingPrefs'] = {'browser': 'ALL'}
+        browser = webdriver.Chrome(desired_capabilities=d, options=options)
     elif browser == 'firefox':
         my_logger.info('\nStart Firefox browser for test...')
         options = webdriver.FirefoxOptions()

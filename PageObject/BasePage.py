@@ -9,9 +9,10 @@ from selenium.common.exceptions import NoSuchElementException
 
 class BasePage:
 
-    def __init__(self, browser, _logger_name):
+    _logger_name = None
+
+    def __init__(self, browser):
         """Initialize web driver"""
-        self._logger_name = _logger_name
         self.driver: WebDriver = browser
         self.logger = logging.getLogger(self._logger_name)
 

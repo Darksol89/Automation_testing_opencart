@@ -100,10 +100,10 @@ class AdminDashboard(BasePage):
         # Change working directory for open config file
         filename = os.path.abspath('selenium.png')
         print(filename)
-        choose_file = self.browser.find_element(*self.ProductForm.CHOOSE_FILE)
+        choose_file = self.driver.find_element(*self.ProductForm.CHOOSE_FILE)
         choose_file.send_keys(filename)
         time.sleep(5)
-        alert = self.browser.switch_to.alert
+        alert = self.driver.switch_to.alert
         alert.accept()
         return self
 

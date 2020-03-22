@@ -4,8 +4,9 @@ from PageObject import ProductPage, CartPage
 
 
 @pytest.mark.parametrize('qty', ['10'], ids=['quantity=10'])
-def test_product_quantity(browser_driver, get_url, qty):
+def test_product_quantity(browser_driver, get_url, my_logger, qty):
     """Test for input in quantity field"""
+    my_logger.info('Input quantity for Product')
     ProductPage(browser_driver) \
         .open_product_page() \
         .quantity(qty)

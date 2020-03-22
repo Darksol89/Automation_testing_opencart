@@ -1,5 +1,6 @@
 """Tests for visible other web element in the Opencart main page"""
 from PageObject.MainPage import MainPage
+import logging
 
 
 def test_main_page(browser_driver, get_url, my_logger):
