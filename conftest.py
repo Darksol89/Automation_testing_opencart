@@ -49,6 +49,7 @@ def pytest_addoption(parser):
 
 @pytest.fixture()
 def my_logger(request):
+    """Custom logger"""
     filename = request.config.getoption('--file')
     logging.basicConfig(level=logging.INFO, filename=filename)
     logger = logging.getLogger('Web Driver')
