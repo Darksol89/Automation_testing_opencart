@@ -10,26 +10,24 @@ class MainPage(BasePage):
     PRODUCT_HEADER = (By.XPATH, '//h3[text()="Featured"]')
     ADD_TO_CARD_BUTTON = (By.XPATH, '//span[text()="Add to Cart"]')
 
-    # Create custom logger
-    logging.basicConfig(level=logging.INFO)
-    logger = logging.getLogger('Main Page')
-
-    def logger_message(self):
-        self.logger.info('Open Main Page')
-        return self
+    _logger_name = 'Main Page'
+    logger = logging.getLogger(_logger_name)
 
     def promoblock_head(self):
+        # self.logger.info('Open Main Page')
         self._wait_for_visible(self.PROMOBLOCK_HEAD)
         return self
 
     def promoblock_footer(self):
+        #self.logger.info('Open Main Page')
         self._wait_for_visible(self.PROMOBLOCK_FOOTER)
         return self
 
     def get_product_header(self):
+        #self._logger_name = 'My Main Page'
         self._wait_for_visible(self.PRODUCT_HEADER)
         return self
 
     def add_to_card_button(self):
-        self.browser.find_element(*self.ADD_TO_CARD_BUTTON).is_enabled()
+        self.driver.find_element(*self.ADD_TO_CARD_BUTTON).is_enabled()
         return self

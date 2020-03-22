@@ -6,8 +6,6 @@ from PageObject.BasePage import BasePage
 from selenium.webdriver.common.by import By
 from helpers.page_helpers import wait_for_element
 
-# Create custom logger
-logging.basicConfig(level=logging.INFO)
 product_logger = logging.getLogger('Product Page')
 
 
@@ -26,7 +24,7 @@ class ProductPage(BasePage):
     def add_to_card(self):
         """Check add to card button"""
         try:
-            wait_for_element(self.browser, self.ADD_TO_CARD)
+            wait_for_element(self.driver, self.ADD_TO_CARD)
             self._click_to_element(self.ADD_TO_CARD)
         except NoSuchElementException:
             print('Add to Card button is not displayed')
@@ -36,7 +34,7 @@ class ProductPage(BasePage):
     def quantity(self, qty):
         """Check input quantity"""
         try:
-            wait_for_element(self.browser, self.QUANTITY)
+            wait_for_element(self.driver, self.QUANTITY)
             self._send_keys(qty, self.QUANTITY)
         except NoSuchElementException:
             print('Quantity field is not available')
@@ -54,8 +52,8 @@ class ProductPage(BasePage):
     def rating(self):
         """Check rating stage"""
         try:
-            wait_for_element(self.browser, self.RATING)
-            rating = self.browser.find_element(*self.RATING)
+            wait_for_element(self.driver, self.RATING)
+            rating = self.driver.find_element(*self.RATING)
             rating.is_displayed()
         except NoSuchElementException:
             print('Rating stage is not displayed')

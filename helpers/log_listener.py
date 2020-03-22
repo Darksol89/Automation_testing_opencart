@@ -1,11 +1,10 @@
 """logger listener"""
-import pytest
 import logging
-import argparse
 from selenium.webdriver.support.events import AbstractEventListener
 
 logging.basicConfig(level=logging.INFO, filename='report.log')
 logger = logging.getLogger('Browser actions')
+
 
 class Listener(AbstractEventListener):
     def before_navigate_to(self, url, driver):

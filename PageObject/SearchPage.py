@@ -5,7 +5,6 @@ from PageObject.GeneralLocators import GeneralSelectors
 from PageObject.BasePage import BasePage
 
 # Create custom logger
-logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger('Search Page')
 
 
@@ -29,7 +28,7 @@ class SearchPage(BasePage):
         return self
 
     def checkbox_subcategories_disabled(self):
-        self.browser.find_element(*self.CHECKBOX_SUBCATEGORIES).get_attribute('disabled')
+        self.driver.find_element(*self.CHECKBOX_SUBCATEGORIES).get_attribute('disabled')
         return self
 
     def checkbox_subcategories_enable(self):
