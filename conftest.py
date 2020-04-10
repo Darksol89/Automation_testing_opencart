@@ -4,7 +4,6 @@ import json
 import os
 import logging
 import sys
-import allure
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from PageObject.LoginPage import LoginPage
@@ -24,6 +23,7 @@ with open(config_path) as config_file:
 admin_name = json_data['username']
 password = json_data['password']
 
+
 # Logger with Info message for start and finish browser
 # logging.basicConfig(level=logging.INFO)
 # logger = logging.getLogger('Web Driver')
@@ -32,7 +32,7 @@ def pytest_addoption(parser):
     """Parser for command line parameters"""
     parser.addoption('--url',
                      action='store',
-                     default='http://127.0.0.1/opencart/',
+                     default='http://127.0.0.1/opencart/admin',
                      help='Main link for Opencart')
     parser.addoption('--browser_name',
                      action='store',
@@ -46,6 +46,7 @@ def pytest_addoption(parser):
                      action='store',
                      default=None,
                      help='Filename with log report')
+
 
 @pytest.fixture()
 def my_logger(request):
@@ -62,6 +63,7 @@ def my_logger(request):
 
     return logger
 
+
 @pytest.fixture()
 def browser_driver(request, my_logger):
     """Initializing and open browser"""
@@ -74,6 +76,7 @@ def browser_driver(request, my_logger):
         d = DesiredCapabilities.CHROME
         options = webdriver.ChromeOptions()
         options.add_argument("headless")
+        options.add_argument('--ignore-certificate-errors')
         d['loggingPrefs'] = {'browser': 'ALL'}
         browser = webdriver.Chrome(desired_capabilities=d, options=options)
     elif browser == 'firefox':
