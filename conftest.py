@@ -32,7 +32,7 @@ def pytest_addoption(parser):
     """Parser for command line parameters"""
     parser.addoption('--url',
                      action='store',
-                     default='http://127.0.0.1/opencart/admin',
+                     default='http://localhost',
                      help='Main link for Opencart')
     parser.addoption('--browser_name',
                      action='store',
