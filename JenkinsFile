@@ -15,9 +15,9 @@ pipeline {
             }
         }
         
-        stage("Third step") {
+        stage("Get GIT version") {
             steps {
-                sh "git clone https://github.com/Darksol89/dz8_selenium.git"
+                sh "git --version"
             }
         }
     }
