@@ -11,13 +11,9 @@ pipeline {
     stages {
         stage("First step") {
             steps {
-                sh "free -h"
+                sh "git --version"
             }
         }
-        
-        stage("Get GIT version") {
-            steps {
-                sh "git --version"
             }
         }
     }
